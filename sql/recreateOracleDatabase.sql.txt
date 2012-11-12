@@ -1,0 +1,31 @@
+-- This will drop the whole Oracle user, with tables, data, constraints, sequences
+
+@dropUser
+
+-- Create user (fresh)
+
+@createUser
+
+-- Create the sequences associated to tables
+-- Need to run this here because table creation is based on existance of sequences
+
+@createSequences
+
+-- Create tables
+
+@createTablePairs
+@createTableIntervals
+@createTableSignalProviders
+@createTableLogins
+@createTableTicks
+@createTableCandles
+
+-- Disable triggers in order to avoid some interference 
+-- between Hibernate and Oracle triggers when inserting
+-- The <param name="sequence"> from *.hbm.xml gets an ID when Hibernate tries to save data
+-- and if triggers are active, the sequence is called again by Oracle at insertion of row
+-- and the ID got by Hibernate becomes obsolete and out of sync with the data in primary key
+
+ALTER TRIGGER ATPFX.BI_TICKS DISABLE
+ALTER TRIGGER ATPFX.BI_CANDLES DISABLE
+

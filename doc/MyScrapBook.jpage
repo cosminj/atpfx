@@ -1,0 +1,3 @@
+//by inspecting here you should get the details of a valid account
+AccountLoginDetails p = new com.google.code.atpfx.AccountLoginDetails();
+p

@@ -1,0 +1,192 @@
+CREATE TABLE PAIRS
+(
+  ID    NUMBER(3),
+  NAME  VARCHAR2(7 BYTE)
+)
+TABLESPACE USERS
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            MINEXTENTS       1
+            MAXEXTENTS       2147483645
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING;
+
+
+CREATE UNIQUE INDEX PAIRS_PK ON PAIRS
+(ID)
+LOGGING
+TABLESPACE USERS
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            MINEXTENTS       1
+            MAXEXTENTS       2147483645
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL;
+
+
+CREATE OR REPLACE TRIGGER "BI_PAIRS"  
+  before insert on "PAIRS"              
+  for each row
+begin  
+    select "PAIRS_SEQ".nextval into :NEW.ID from dual;
+end;
+/
+SHOW ERRORS;
+
+
+
+ALTER TABLE PAIRS ADD (
+  CONSTRAINT PAIRS_PK
+ PRIMARY KEY
+ (ID)
+    USING INDEX 
+    TABLESPACE USERS
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          64K
+                MINEXTENTS       1
+                MAXEXTENTS       2147483645
+                PCTINCREASE      0
+               ));
+
+
+
+Insert into PAIRS
+   (ID, NAME)
+ Values
+   (1, 'EUR/USD');
+Insert into PAIRS
+   (ID, NAME)
+ Values
+   (2, 'USD/JPY');
+Insert into PAIRS
+   (ID, NAME)
+ Values
+   (3, 'GBP/USD');
+Insert into PAIRS
+   (ID, NAME)
+ Values
+   (4, 'USD/CHF');
+Insert into PAIRS
+   (ID, NAME)
+ Values
+   (5, 'EUR/CHF');
+Insert into PAIRS
+   (ID, NAME)
+ Values
+   (6, 'AUD/USD');
+Insert into PAIRS
+   (ID, NAME)
+ Values
+   (7, 'USD/CAD');
+Insert into PAIRS
+   (ID, NAME)
+ Values
+   (8, 'NZD/USD');
+Insert into PAIRS
+   (ID, NAME)
+ Values
+   (9, 'EUR/GBP');
+Insert into PAIRS
+   (ID, NAME)
+ Values
+   (10, 'EUR/JPY');
+Insert into PAIRS
+   (ID, NAME)
+ Values
+   (11, 'GBP/JPY');
+Insert into PAIRS
+   (ID, NAME)
+ Values
+   (12, 'CHF/JPY');
+Insert into PAIRS
+   (ID, NAME)
+ Values
+   (13, 'GBP/CHF');
+Insert into PAIRS
+   (ID, NAME)
+ Values
+   (14, 'EUR/AUD');
+Insert into PAIRS
+   (ID, NAME)
+ Values
+   (15, 'EUR/CAD');
+Insert into PAIRS
+   (ID, NAME)
+ Values
+   (16, 'AUD/CAD');
+Insert into PAIRS
+   (ID, NAME)
+ Values
+   (17, 'AUD/JPY');
+Insert into PAIRS
+   (ID, NAME)
+ Values
+   (18, 'CAD/JPY');
+Insert into PAIRS
+   (ID, NAME)
+ Values
+   (19, 'NZD/JPY');
+Insert into PAIRS
+   (ID, NAME)
+ Values
+   (20, 'GBP/CAD');
+Insert into PAIRS
+   (ID, NAME)
+ Values
+   (21, 'GBP/NZD');
+Insert into PAIRS
+   (ID, NAME)
+ Values
+   (22, 'GBP/AUD');
+Insert into PAIRS
+   (ID, NAME)
+ Values
+   (23, 'AUD/NZD');
+Insert into PAIRS
+   (ID, NAME)
+ Values
+   (24, 'AUD/CHF');
+Insert into PAIRS
+   (ID, NAME)
+ Values
+   (25, 'EUR/NZD');
+Insert into PAIRS
+   (ID, NAME)
+ Values
+   (26, 'USD/ZAR');
+Insert into PAIRS
+   (ID, NAME)
+ Values
+   (27, 'USD/SGD');
+Insert into PAIRS
+   (ID, NAME)
+ Values
+   (28, 'USD/HKD');
+Insert into PAIRS
+   (ID, NAME)
+ Values
+   (29, 'USD/TRY');
+Insert into PAIRS
+   (ID, NAME)
+ Values
+   (30, 'EUR/TRY');
+COMMIT;
+

@@ -1,0 +1,77 @@
+CREATE TABLE SIGNALPROVIDERS
+(
+  ID      NUMBER(3),
+  LABEL   VARCHAR2(20 BYTE),
+  SERVER  VARCHAR2(250 BYTE)
+)
+TABLESPACE USERS
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            MINEXTENTS       1
+            MAXEXTENTS       2147483645
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING;
+
+
+CREATE UNIQUE INDEX SIGNALPROVIDERS_PK ON SIGNALPROVIDERS
+(ID)
+LOGGING
+TABLESPACE USERS
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            MINEXTENTS       1
+            MAXEXTENTS       2147483645
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL;
+
+
+CREATE OR REPLACE TRIGGER "BI_SIGNALPROVIDERS"   
+  before insert on "SIGNALPROVIDERS"               
+  for each row
+begin   
+    select "SIGNALPROVIDERS_SEQ".nextval into :NEW.ID from dual; 
+end;
+/
+SHOW ERRORS;
+
+
+
+ALTER TABLE SIGNALPROVIDERS ADD (
+  CONSTRAINT SIGNALPROVIDERS_PK
+ PRIMARY KEY
+ (ID)
+    USING INDEX 
+    TABLESPACE USERS
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          64K
+                MINEXTENTS       1
+                MAXEXTENTS       2147483645
+                PCTINCREASE      0
+               ));
+
+
+
+Insert into SIGNALPROVIDERS
+   (ID, LABEL, SERVER)
+ Values
+   (1, 'FXCM-DEMO', 'http://www.fxcorporate.com/Hosts.jsp');
+COMMIT;
+

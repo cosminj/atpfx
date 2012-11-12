@@ -1,0 +1,84 @@
+
+CREATE TABLE TICKS
+(
+  PAIR_ID        NUMBER,
+  BUY            NUMBER(12,6),
+  SELL           NUMBER(12,6),
+  TIMESTAMP      NUMBER(20),
+  SIGNALPROVIDER_ID  NUMBER,
+  ID             NUMBER(9)
+)
+TABLESPACE USERS
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            MINEXTENTS       1
+            MAXEXTENTS       2147483645
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING;
+
+
+CREATE UNIQUE INDEX TICKS_PK ON TICKS
+(ID)
+LOGGING
+TABLESPACE USERS
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            MINEXTENTS       1
+            MAXEXTENTS       2147483645
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL;
+
+
+CREATE OR REPLACE TRIGGER "BI_TICKS"  
+  before insert on "TICKS"              
+  for each row
+begin  
+    select "TICKS_SEQ".nextval into :NEW.ID from dual;
+end;
+/
+SHOW ERRORS;
+
+
+
+ALTER TABLE TICKS ADD (
+  CONSTRAINT TICKS_PK
+ PRIMARY KEY
+ (ID)
+    USING INDEX 
+    TABLESPACE USERS
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          64K
+                MINEXTENTS       1
+                MAXEXTENTS       2147483645
+                PCTINCREASE      0
+               ));
+
+
+ALTER TABLE TICKS ADD (
+  CONSTRAINT TICKS_FK 
+ FOREIGN KEY (SIGNALPROVIDER_ID) 
+ REFERENCES SIGNALPROVIDERS (ID));
+
+ALTER TABLE TICKS ADD (
+  CONSTRAINT TICKS_FK2 
+ FOREIGN KEY (PAIR_ID) 
+ REFERENCES PAIRS (ID));
+

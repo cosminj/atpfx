@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.google.code.atpfx">
+	<!--
+		if the package attribute is not set to hibernate-mapping tag, you need
+		to qualify the class
+	-->
+	<class name="com.google.code.atpfx.data.Pair" table="PAIRS">
+		<id name="pairId" column="ID" />
+		<property name="pairName" column="NAME" />
+	</class>
+</hibernate-mapping>

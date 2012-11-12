@@ -1,0 +1,4 @@
+Just to have the sql folder in place.
+
+For Oracle database, use "recreateOracleDatabase.sql".
+

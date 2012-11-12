@@ -1,0 +1,125 @@
+CREATE TABLE INTERVALS
+(
+  ID       NUMBER(2),
+  NAME     VARCHAR2(20 BYTE),
+  MINUTES  NUMBER(6)
+)
+TABLESPACE USERS
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            MINEXTENTS       1
+            MAXEXTENTS       2147483645
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING;
+
+
+CREATE UNIQUE INDEX INTERVALS_PK ON INTERVALS
+(ID)
+LOGGING
+TABLESPACE USERS
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            MINEXTENTS       1
+            MAXEXTENTS       2147483645
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL;
+
+
+CREATE OR REPLACE TRIGGER "BI_INTERVALS"   
+  before insert on "INTERVALS"               
+  for each row
+begin   
+    select "INTERVALS_SEQ".nextval into :NEW.ID from dual; 
+end;
+/
+SHOW ERRORS;
+
+
+
+ALTER TABLE INTERVALS ADD (
+  CONSTRAINT INTERVALS_PK
+ PRIMARY KEY
+ (ID)
+    USING INDEX 
+    TABLESPACE USERS
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          64K
+                MINEXTENTS       1
+                MAXEXTENTS       2147483645
+                PCTINCREASE      0
+               ));
+
+
+
+Insert into INTERVALS
+   (ID, NAME, MINUTES)
+ Values
+   (1, '1 Min', 1);
+Insert into INTERVALS
+   (ID, NAME, MINUTES)
+ Values
+   (2, '5 Min', 5);
+Insert into INTERVALS
+   (ID, NAME, MINUTES)
+ Values
+   (3, '10 Min', 10);
+Insert into INTERVALS
+   (ID, NAME, MINUTES)
+ Values
+   (4, '15 Min', 15);
+Insert into INTERVALS
+   (ID, NAME, MINUTES)
+ Values
+   (5, '30 Min', 30);
+Insert into INTERVALS
+   (ID, NAME, MINUTES)
+ Values
+   (6, '1 Hr', 60);
+Insert into INTERVALS
+   (ID, NAME, MINUTES)
+ Values
+   (7, '2 Hrs', 120);
+Insert into INTERVALS
+   (ID, NAME, MINUTES)
+ Values
+   (8, '4 Hrs', 240);
+Insert into INTERVALS
+   (ID, NAME, MINUTES)
+ Values
+   (9, '8 Hrs', 480);
+Insert into INTERVALS
+   (ID, NAME, MINUTES)
+ Values
+   (10, 'Daily', 1440);
+Insert into INTERVALS
+   (ID, NAME, MINUTES)
+ Values
+   (11, 'Weekly', 10080);
+Insert into INTERVALS
+   (ID, NAME, MINUTES)
+ Values
+   (12, 'Monthly', 43680);
+Insert into INTERVALS
+   (ID, NAME, MINUTES)
+ Values
+   (13, 'Yearly', 518400);
+COMMIT;
+

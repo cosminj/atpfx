@@ -1,0 +1,6 @@
+CREATE sequence "PAIRS_SEQ"; 
+CREATE sequence "TICKS_SEQ";
+CREATE sequence "LOGINS_SEQ";
+CREATE sequence "INTERVALS_SEQ";
+CREATE sequence "SIGNALPROVIDERS_SEQ";
+CREATE sequence "CANDLES_SEQ";

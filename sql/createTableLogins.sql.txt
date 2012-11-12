@@ -1,0 +1,93 @@
+CREATE TABLE LOGINS
+(
+  ID             NUMBER(9),
+  SIGNALPROVIDER_ID  NUMBER(3),
+  USERNAME       VARCHAR2(20 BYTE),
+  PASSWORD       VARCHAR2(20 BYTE),
+  TYPE           VARCHAR2(4 BYTE)
+)
+TABLESPACE USERS
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            MINEXTENTS       1
+            MAXEXTENTS       2147483645
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING;
+
+
+CREATE UNIQUE INDEX LOGINS_PK ON LOGINS
+(ID)
+LOGGING
+TABLESPACE USERS
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            MINEXTENTS       1
+            MAXEXTENTS       2147483645
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL;
+
+
+CREATE OR REPLACE TRIGGER "BI_LOGINS"   
+  before insert on "LOGINS"               
+  for each row
+begin   
+    select "LOGINS_SEQ".nextval into :NEW.ID from dual; 
+end;
+/
+SHOW ERRORS;
+
+
+
+ALTER TABLE LOGINS ADD (
+  CONSTRAINT LOGINS_CK1
+ CHECK (TYPE IN ('DEMO','REAL','HOME')));
+
+ALTER TABLE LOGINS ADD (
+  CONSTRAINT LOGINS_PK
+ PRIMARY KEY
+ (ID)
+    USING INDEX 
+    TABLESPACE USERS
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          64K
+                MINEXTENTS       1
+                MAXEXTENTS       2147483645
+                PCTINCREASE      0
+               ));
+
+
+ALTER TABLE LOGINS ADD (
+  CONSTRAINT LOGINS_FK 
+ FOREIGN KEY (SIGNALPROVIDER_ID) 
+ REFERENCES SIGNALPROVIDERS (ID));
+
+
+
+Insert into LOGINS
+   (ID, SIGNALPROVIDER_ID, USERNAME, PASSWORD, TYPE)
+ Values
+   (1, 1, 'AMD85531001', '1246', 'DEMO');
+Insert into LOGINS
+   (ID, SIGNALPROVIDER_ID, USERNAME, PASSWORD, TYPE)
+ Values
+   (2, 1, 'AMD86659001', '1597', 'DEMO');
+COMMIT;
+

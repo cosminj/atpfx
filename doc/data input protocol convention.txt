@@ -1,0 +1,27 @@
+Data from FXCM comes in messages.
+The messages can be status messages, or generic messages.
+Prices can be found in generic messages.
+The generic messages can be parsed to get prices, time stamps.
+The functionality for the FXCM data feed goes in class FXCMConnection.
+
+Data is then put in an internal structure.
+The internal structure ensures other data provider can be connected later to the system.
+
+The internal structure is a class "candle" with following members included:
+-pair
+-interval
+-open time
+-min
+-max
+-sell, a.k.a ask
+-buy, a.k.a bid
+-close time
+	
+The properties files may be:
+- accounts properties file, with username and passwords, at least one valid username/password
+- pairs properties file, where each currency pair is associated with an ordinal number
+- intervals properties file, where the names of intervals are associated with an ordinal number
+- other configuration properties file, with the name of the file where data is stored 
+  or retrieved from, the name of the database used, and other details
+
+
