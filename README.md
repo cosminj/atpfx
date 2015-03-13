@@ -47,3 +47,12 @@ The properties files may be
 - intervals properties file, where the names of intervals are associated with an ordinal number
 - other configuration properties file, with the name of the file where data is stored
   or retrieved from, the name of the database used, and other details
+
+## External dependencies (non public)
+
+The maven projects uses two external libraries from FXCM : API and messaging. These two libraries can be downloaded from the FXCM java API forum here: [FXCM Forum](http://www.dailyfx.com/forex_forum/java-trading-api-support/63933-java-trading-api-builds-subscribe-updates.html)
+
+
+## Future:
+
+The project should actually switch to use the FIX Protocol API , store data in a big-data db like Cassandra clusters and be deployed on live OSGI runtimes.
