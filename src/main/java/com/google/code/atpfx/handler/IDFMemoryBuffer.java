@@ -16,8 +16,8 @@ public class IDFMemoryBuffer {
     private Map<Pair, List<Tick>> ticks;
 
     private IDFMemoryBuffer() {
-        latestTicks = new HashMap<Pair, Tick>();
-        ticks = new HashMap<Pair, List<Tick>>();
+        latestTicks = new HashMap<>();
+        ticks = new HashMap<>();
     }
 
     static {

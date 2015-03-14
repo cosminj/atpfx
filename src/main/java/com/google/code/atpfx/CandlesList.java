@@ -6,7 +6,6 @@ import java.util.Observable;
 import java.util.Observer;
 
 import com.google.code.atpfx.data.Intervals;
-import org.hibernate.classic.Session;
 
 import com.google.code.db.HibernateUtil;
 import com.google.code.atpfx.data.Tick;

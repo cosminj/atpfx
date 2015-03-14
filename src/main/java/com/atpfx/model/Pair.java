@@ -1,4 +1,4 @@
-package com.atpfx.data;
+package com.atpfx.model;
 
 public enum Pair {
 

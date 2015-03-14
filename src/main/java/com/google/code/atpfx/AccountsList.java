@@ -8,7 +8,7 @@ public class AccountsList {
 	private ArrayList<AccountLoginDetails> accountsList;
 
 	public AccountsList(){
-		accountsList = new ArrayList<AccountLoginDetails>();
+		accountsList = new ArrayList<>();
 		this.populateAccountsList();
 	}
 	

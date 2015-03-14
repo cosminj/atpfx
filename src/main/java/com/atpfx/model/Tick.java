@@ -1,4 +1,4 @@
-package com.atpfx.data;
+package com.atpfx.model;
 
 import static javax.persistence.GenerationType.AUTO;
 

@@ -12,7 +12,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  */
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"/repository-config.xml"})
+//@ContextConfiguration(locations = {"/repository-config.xml"})
 //@Transactional(propagation = Propagation.REQUIRED, timeout = 3600)
 public abstract class SpringTestBase extends TestCase {
 

@@ -1,4 +1,4 @@
-package com.atpfx.data;
+package com.atpfx.model;
 
 import static javax.persistence.GenerationType.AUTO;
 
@@ -15,7 +15,18 @@ public class SignalProvider {
 
     private String label;
 
-    private String server;
+    private String serverUrl;
+
+    /**
+     * Needed by JPA
+     */
+    @SuppressWarnings("unused")
+    protected SignalProvider() {}
+
+    public SignalProvider(String label, String serverUrl) {
+        this.label = label;
+        this.serverUrl = serverUrl;
+    }
 
     public Long getId() {
         return id;
@@ -25,7 +36,7 @@ public class SignalProvider {
         return label;
     }
 
-    public String getServer() {
-        return server;
+    public String getServerUrl() {
+        return serverUrl;
     }
 }
