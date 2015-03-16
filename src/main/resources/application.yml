@@ -13,11 +13,11 @@ spring:
     datasource:
         driverClassName: org.postgresql.Driver
 # locally
-#        url: jdbc:postgresql://localhost/postgres
+        url: jdbc:postgresql://localhost/atpfx
 # heroku:
-#        url: jdbc:postgresql://ec2-107-20-166-127.compute-1.amazonaws.com:5432/d60sg0hsmavm1d
-#        username: vwarfasctojfxo
-#        password: Xb0Clri3cCng1jJNFnGgBufOO4
+#        url: jdbc:postgresql://ec2-107-20-166-127.compute-1.amazonaws.com:5432/yourdb
+#        username: usern
+#        password: passw
     dao:
       exceptiontranslation:
         enabled: true

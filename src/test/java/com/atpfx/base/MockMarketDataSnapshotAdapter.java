@@ -6,7 +6,7 @@
  * Vestibulum commodo. Ut rhoncus gravida arcu.
  */
 
-package com.google.code.atpfx.base;
+package com.atpfx.base;
 
 import com.fxcm.fix.UTCDate;
 import com.fxcm.fix.UTCTimeOnly;
