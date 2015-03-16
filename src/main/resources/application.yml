@@ -1,0 +1,34 @@
+# this is configured as an environment variable by heroku
+server:
+    port: ${port:7777}
+
+spring:
+    jpa:
+        database: POSTGRESQL
+        show-sql: false
+        hibernate:
+            ddl-auto: update
+            naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+            dialect: org.hibernate.dialect.PostgreSQL9Dialect
+    datasource:
+        driverClassName: org.postgresql.Driver
+# locally
+        url: jdbc:postgresql://localhost/atpfx
+# heroku:
+#        url: jdbc:postgresql://ec2-107-20-166-127.compute-1.amazonaws.com:5432/yourdb
+#        username: usern
+#        password: passw
+    dao:
+      exceptiontranslation:
+        enabled: true
+
+logging.level: INFO
+
+# app specific properties
+#enable.persistence: false
+
+# fxcm providers
+fxcm:
+  username: D31329991001
+  password: 5865
+  user.session.pin: 111111
