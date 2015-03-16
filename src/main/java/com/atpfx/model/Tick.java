@@ -11,11 +11,16 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.fxcm.fix.NotDefinedException;
 import com.fxcm.fix.entity.MarketDataSnapshot;
 
 @Entity
 public class Tick {
+
+    private static final Logger logger = LoggerFactory.getLogger(Tick.class);
 
     @Id
     @GeneratedValue(strategy = AUTO)
@@ -37,7 +42,8 @@ public class Tick {
      * Needed by JPA
      */
     @SuppressWarnings("unused")
-    protected Tick() {}
+    protected Tick() {
+    }
 
     public Tick(Pair pair, double sell, double buy, Date time, SignalProvider signalProvider) {
         this.pair = pair;
@@ -47,9 +53,13 @@ public class Tick {
         this.signalProvider = signalProvider;
     }
 
-    public Tick(MarketDataSnapshot snap, SignalProvider signalProvider) throws NotDefinedException {
+    public Tick(MarketDataSnapshot snap, SignalProvider signalProvider) {
         this.signalProvider = signalProvider;
-        pair = Pair.valueOf(snap.getInstrument().getSymbol().toUpperCase());
+        try {
+            pair = Pair.valueOf(snap.getInstrument().getSymbol().toUpperCase());
+        } catch (NotDefinedException ex) {
+            logger.error("Couldn't compute pair from message {}", snap);
+        }
         sell = snap.getBidClose();
         buy = snap.getAskClose();
         time = new Date(snap.getOpenTimestamp().getTime());

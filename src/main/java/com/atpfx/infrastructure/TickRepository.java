@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 import com.atpfx.model.Tick;
 
 @Repository
-public interface TickRepository extends CrudRepository<Tick, Long>{
+public interface TickRepository extends CrudRepository<Tick, Long> {
 }

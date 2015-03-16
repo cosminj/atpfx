@@ -28,5 +28,4 @@ public class Atpfx {
     public static void main(String[] args) {
         SpringApplication.run(Atpfx.class, args);
     }
-
 }

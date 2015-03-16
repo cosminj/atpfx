@@ -1,35 +1,67 @@
 package com.atpfx.fxcm;
 
-import java.util.List;
+import static com.atpfx.message.PersistentMessageHandler.FXCM_LABEL;
 
-import com.atpfx.forex.ForexConnection;
-import com.fxcm.external.api.transport.listeners.IGenericMessageListener;
-import com.fxcm.messaging.ITransportable;
+import java.util.Properties;
 
-public class FxcmConnection implements ForexConnection {
+import javax.annotation.Resource;
 
-    @Override
-    public void addListener(IGenericMessageListener l) {
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
-    }
+import com.atpfx.infrastructure.SignalProviderRepository;
+import com.atpfx.model.SignalProvider;
+import com.fxcm.external.api.transport.FXCMLoginProperties;
+import com.fxcm.external.api.transport.GatewayFactory;
+import com.fxcm.external.api.transport.IGateway;
+import com.fxcm.messaging.IUserSession;
+import com.fxcm.messaging.util.IConnectionManager;
 
-    @Override
-    public void open() {
+@Configuration
+public class FxcmConnection {
 
-    }
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @Override
-    public boolean isOpened() {
-        return false;
-    }
+    @Value("${fxcm.username}")
+    private String fxcmUsername;
+    @Value("${fxcm.password}")
+    private String fxcmPassword;
+    @Value("${fxcm.user.session.pin}")
+    private String sessionPin;
 
-    @Override
-    public void close() {
+    @Resource
+    private SignalProviderRepository signalProviderRepository;
 
-    }
+    @Resource
+    private ForexMessageListener forexMessageListener;
 
-    @Override
-    public List<ITransportable> getGenericMessagesReceived() {
-        return null;
+    @Bean
+    public IGateway connect() throws Exception {
+        SignalProvider signalProvider = signalProviderRepository.findByLabel(FXCM_LABEL);
+
+        String fxcmUrl = signalProvider.getServerUrl();
+
+        IGateway fxcmGateway = GatewayFactory.createGateway();
+        fxcmGateway.registerGenericMessageListener(forexMessageListener);
+        FXCMLoginProperties properties = new FXCMLoginProperties(fxcmUsername, fxcmPassword, "Demo", fxcmUrl);
+        Properties props = new Properties();
+        props.put(IUserSession.PIN, sessionPin);
+
+        props.put(IConnectionManager.PROXY_SERVER, "localhost");
+        props.put(IConnectionManager.PROXY_PORT, "3128");
+
+        properties.setProperties(props);
+
+        fxcmGateway.login(properties);
+
+        // must call this "requestTradingSessionStatus" to start getting messages
+        String status = fxcmGateway.requestTradingSessionStatus();
+
+        logger.info("Connection opened with login: {}", status);
+
+        return fxcmGateway;
     }
 }

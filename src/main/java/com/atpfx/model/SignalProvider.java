@@ -21,7 +21,8 @@ public class SignalProvider {
      * Needed by JPA
      */
     @SuppressWarnings("unused")
-    protected SignalProvider() {}
+    protected SignalProvider() {
+    }
 
     public SignalProvider(String label, String serverUrl) {
         this.label = label;

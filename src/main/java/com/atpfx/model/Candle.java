@@ -33,7 +33,8 @@ public class Candle {
      * Needed by JPA
      */
     @SuppressWarnings("unused")
-    protected Candle() {}
+    protected Candle() {
+    }
 
     public Candle(SignalProvider signalProvider, Pair pair, Tick open, Tick low, Tick high, Tick close, Period interval, Date openTime) {
         this.signalProvider = signalProvider;
@@ -46,5 +47,15 @@ public class Candle {
         this.openTime = openTime;
     }
 
+    public void checkNewHigh(Tick t) {
+        if (t.getBuy() > high.getBuy()) {
+            high = t;
+        }
+    }
 
+    public void checkNewLow(Tick t) {
+        if (t.getSell() < low.getSell()) {
+            low = t;
+        }
+    }
 }
