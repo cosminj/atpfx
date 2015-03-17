@@ -1,3 +1,5 @@
+Deployed to heroku under: [https://atpfx.herokuapp.com](https://atpfx.herokuapp.com) 
+
 ATPFX
 =====
 ## Automatic Trade Platform for Foreign Exchange market
