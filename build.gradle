@@ -68,6 +68,6 @@ task wrapper(type: Wrapper) {
     gradleVersion = '2.3'
 }
 
-task stage(dependsOn: ['installApp'])
+task stage(dependsOn: ['installDist'])
 
 mainClassName = "com.atpfx.Atpfx"
