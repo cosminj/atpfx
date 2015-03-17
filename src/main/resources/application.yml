@@ -1,7 +1,3 @@
-# this is configured as an environment variable by heroku
-server:
-    port: ${port:7777}
-
 spring:
     jpa:
         database: POSTGRESQL
@@ -13,20 +9,22 @@ spring:
     datasource:
         driverClassName: org.postgresql.Driver
 # locally
-        url: jdbc:postgresql://localhost/atpfx
+#        url: jdbc:postgresql://localhost/atpfx
 # heroku:
-#        url: jdbc:postgresql://ec2-107-20-166-127.compute-1.amazonaws.com:5432/yourdb
-#        username: usern
-#        password: passw
+        url: jdbc:postgresql://ec2-23-23-215-150.compute-1.amazonaws.com:5432/de5ep4rol5uj29
+        username: pnlflomjvojlcg
+        password: eaBetviusZre9ql1htfK9zECow
     dao:
       exceptiontranslation:
         enabled: true
 
 logging.level: INFO
 
-# app specific properties
-#enable.persistence: false
+# this is configured as an environment variable by heroku
+server:
+    port: ${port:7777}
 
+# app specific properties
 # fxcm providers
 fxcm:
   username: D172739190001

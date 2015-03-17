@@ -69,3 +69,5 @@ task wrapper(type: Wrapper) {
 }
 
 task stage(dependsOn: ['installApp'])
+
+mainClassName = "com.atpfx.Atpfx"
