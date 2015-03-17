@@ -34,7 +34,7 @@ class PersistentMessageHandlerTest extends Specification {
                 instrument: new Instrument("$Pair.AUD_CAD")
         ))
         then:
-        1 * signalProviderRepository.findByLabel(FXCM_LABEL) >> new SignalProvider(FXCM_LABEL, 'url')
+        1 * signalProviderRepository.getByLabel(FXCM_LABEL) >> new SignalProvider(FXCM_LABEL, 'url')
         1 * tickRepository.save(_ as Tick) >> { tick = it[0]}
         tick.pair == Pair.AUD_CAD
     }

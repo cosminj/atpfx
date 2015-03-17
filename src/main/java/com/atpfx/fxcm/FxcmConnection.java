@@ -9,8 +9,7 @@ import javax.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 
 import com.atpfx.infrastructure.SignalProviderRepository;
 import com.atpfx.model.SignalProvider;
@@ -20,7 +19,7 @@ import com.fxcm.external.api.transport.IGateway;
 import com.fxcm.messaging.IUserSession;
 import com.fxcm.messaging.util.IConnectionManager;
 
-@Configuration
+@Component
 public class FxcmConnection {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -38,13 +37,18 @@ public class FxcmConnection {
     @Resource
     private ForexMessageListener forexMessageListener;
 
-    @Bean
+    private IGateway fxcmGateway;
+
     public IGateway connect() throws Exception {
-        SignalProvider signalProvider = signalProviderRepository.findByLabel(FXCM_LABEL);
+        if (fxcmGateway != null && fxcmGateway.isConnected()) {
+            return fxcmGateway;
+        }
+
+        SignalProvider signalProvider = signalProviderRepository.getByLabel(FXCM_LABEL);
 
         String fxcmUrl = signalProvider.getServerUrl();
 
-        IGateway fxcmGateway = GatewayFactory.createGateway();
+        fxcmGateway = GatewayFactory.createGateway();
         fxcmGateway.registerGenericMessageListener(forexMessageListener);
         FXCMLoginProperties properties = new FXCMLoginProperties(fxcmUsername, fxcmPassword, "Demo", fxcmUrl);
         Properties props = new Properties();

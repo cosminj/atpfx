@@ -29,7 +29,7 @@ public class PersistentMessageHandler implements MessageHandler {
     @Override
     public void handleMessage(ITransportable msg) {
         // TODO : inject signal provider based on context?
-        SignalProvider signalProvider = signalProviderRepository.findByLabel(FXCM_LABEL);
+        SignalProvider signalProvider = signalProviderRepository.getByLabel(FXCM_LABEL);
 
         if (msg instanceof MarketDataSnapshot) {
             MarketDataSnapshot message = (MarketDataSnapshot) msg;

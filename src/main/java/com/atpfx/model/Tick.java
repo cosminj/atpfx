@@ -7,8 +7,10 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
 import org.slf4j.Logger;
@@ -36,6 +38,7 @@ public class Tick {
 
     private Date time;
 
+    @ManyToOne(fetch = FetchType.LAZY)
     private SignalProvider signalProvider;
 
     /**
@@ -43,14 +46,6 @@ public class Tick {
      */
     @SuppressWarnings("unused")
     protected Tick() {
-    }
-
-    public Tick(Pair pair, double sell, double buy, Date time, SignalProvider signalProvider) {
-        this.pair = pair;
-        this.sell = sell;
-        this.buy = buy;
-        this.time = time;
-        this.signalProvider = signalProvider;
     }
 
     public Tick(MarketDataSnapshot snap, SignalProvider signalProvider) {

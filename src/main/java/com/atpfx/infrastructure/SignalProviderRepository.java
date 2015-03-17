@@ -8,5 +8,5 @@ import com.atpfx.model.SignalProvider;
 @Repository
 public interface SignalProviderRepository extends CrudRepository<SignalProvider, Long> {
 
-    SignalProvider findByLabel(String label);
+    SignalProvider getByLabel(String label);
 }

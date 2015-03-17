@@ -29,6 +29,6 @@ logging.level: INFO
 
 # fxcm providers
 fxcm:
-  username: D31329991001
-  password: 5865
+  username: D172739190001
+  password: 1649
   user.session.pin: 111111
