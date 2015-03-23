@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/cosminj/atpfx.svg?branch=master)](https://travis-ci.org/cosminj/atpfx)
+[![Coverage Status](https://img.shields.io/coveralls/cosminj/atpfx.svg?branch=master)](https://coveralls.io/r/cosminj/atpfx?branch=master)
 
 Deployed to heroku under: [https://atpfx.herokuapp.com](https://atpfx.herokuapp.com) 
 
