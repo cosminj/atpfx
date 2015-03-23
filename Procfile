@@ -1,1 +1,1 @@
-web: build/install/atpfx/bin/atpfx
+web: java $JAVA_OPTS -Dserver.port=$PORT -jar atpfx.jar
