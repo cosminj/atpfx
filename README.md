@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/cosminj/atpfx.svg?branch=master)](https://travis-ci.org/cosminj/atpfx)
+
 Deployed to heroku under: [https://atpfx.herokuapp.com](https://atpfx.herokuapp.com) 
 
 ATPFX
