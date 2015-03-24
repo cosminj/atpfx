@@ -23,7 +23,7 @@ The capabilities of atpfx platform fall in a few categories:
 For more information on the forex market, the project roadmap, and examples please contact the project owners.
 
 ## FIX protocol specifications according to FXCM
-![FXCM-FIX-BSI.pdf](doc/FXCM-FIX-BSI.pdf)
+[FXCM-FIX-BSI.pdf](/doc/FXCM-FIX-BSI.pdf)
 
 ## Data types diagram:
 ![alt text](/doc/diagrams/DataTypesDiagram.png "DataTypesDiagram.png")
