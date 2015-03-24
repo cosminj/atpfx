@@ -1,6 +1,6 @@
 package com.atpfx.fxcm;
 
-import static com.atpfx.message.PersistentMessageHandler.FXCM_LABEL;
+import static com.atpfx.message.MarketDataSnapshotHandler.FXCM_LABEL;
 
 import java.util.Properties;
 
@@ -30,6 +30,10 @@ public class FxcmConnection {
     private String fxcmPassword;
     @Value("${fxcm.user.session.pin}")
     private String sessionPin;
+    @Value("${local.proxy.host:#{null}}")
+    private String proxyHost;
+    @Value("${local.proxy.port:#{null}}")
+    private Integer proxyPort;
 
     @Resource
     private SignalProviderRepository signalProviderRepository;
@@ -54,8 +58,10 @@ public class FxcmConnection {
         Properties props = new Properties();
         props.put(IUserSession.PIN, sessionPin);
 
-        props.put(IConnectionManager.PROXY_SERVER, "localhost");
-        props.put(IConnectionManager.PROXY_PORT, "3128");
+        if(proxyHost != null) {
+            props.put(IConnectionManager.PROXY_SERVER, proxyHost);
+            props.put(IConnectionManager.PROXY_PORT, proxyPort);
+        }
 
         properties.setProperties(props);
 

@@ -1,8 +1,8 @@
 package com.atpfx.message;
 
-import com.fxcm.messaging.ITransportable;
+public interface MessageHandler<T> {
 
-public interface MessageHandler {
+    void handle(T message);
 
-    void handleMessage(ITransportable message);
+    String fxcmType();
 }

@@ -17,7 +17,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.fxcm.fix.NotDefinedException;
-import com.fxcm.fix.entity.MarketDataSnapshot;
+import com.fxcm.fix.pretrade.MarketDataSnapshot;
 
 @Entity
 public class Tick {
