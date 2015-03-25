@@ -27,6 +27,18 @@ public class ForexMessageListener implements IGenericMessageListener {
 
     private Map<String, MessageHandler> handlerMap;
 
+    MessageHandler<ITransportable> errorHandler = new MessageHandler<ITransportable>() {
+        @Override
+        public void handle(ITransportable aMessage) {
+            logger.error("Cannot find handler for message type {}", aMessage.getType());
+        }
+
+        @Override
+        public String fxcmType() {
+            return null;
+        }
+    };
+
     @PostConstruct
     public void postConstruct() {
         handlerMap = handlers
@@ -37,16 +49,6 @@ public class ForexMessageListener implements IGenericMessageListener {
     @SuppressWarnings("unchecked")
     @Override
     public void messageArrived(ITransportable aMessage) {
-        handlerMap.getOrDefault(aMessage.getType().getCode(), new MessageHandler() {
-            @Override
-            public void handle(Object message) {
-                logger.error("Cannot find handler for message type {}", aMessage.getType());
-            }
-
-            @Override
-            public String fxcmType() {
-                return null;
-            }
-        }).handle(aMessage);
+        handlerMap.getOrDefault(aMessage.getType().getCode(), errorHandler).handle(aMessage);
     }
 }
