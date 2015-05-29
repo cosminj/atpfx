@@ -9,11 +9,11 @@ spring:
     datasource:
         driverClassName: org.postgresql.Driver
 # locally
-#        url: jdbc:postgresql://localhost/atpfx
+        url: jdbc:postgresql://localhost/atpfx
 # heroku:
-        url: jdbc:postgresql://ec2-23-23-215-150.compute-1.amazonaws.com:5432/de5ep4rol5uj29
-        username: pnlflomjvojlcg
-        password: eaBetviusZre9ql1htfK9zECow
+#        url: jdbc:postgresql://ec2-23-23-215-150.compute-1.amazonaws.com:5432/de5ep4rol5uj29
+#        username: pnlflomjvojlcg
+#        password: eaBetviusZre9ql1htfK9zECow
     dao:
       exceptiontranslation:
         enabled: true
@@ -27,14 +27,14 @@ server:
 # app specific properties
 # fxcm providers
 fxcm:
-  username: D172739190001
-  password: 1649
+  username: D172817499001
+  password: 4414
   user.session.pin: 111111
 
 # should be configured as an env. variable
 #proxy:
-#  local.proxy.host:
-#  local.proxy.port:
+local.proxy.host: localhost
+local.proxy.port: 3128
 
 
 ---

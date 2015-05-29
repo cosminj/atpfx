@@ -33,7 +33,7 @@ public class FxcmConnection {
     @Value("${local.proxy.host:#{null}}")
     private String proxyHost;
     @Value("${local.proxy.port:#{null}}")
-    private Integer proxyPort;
+    private String proxyPort;
 
     @Resource
     private SignalProviderRepository signalProviderRepository;
@@ -58,7 +58,7 @@ public class FxcmConnection {
         Properties props = new Properties();
         props.put(IUserSession.PIN, sessionPin);
 
-        if(proxyHost != null) {
+        if (proxyHost != null) {
             props.put(IConnectionManager.PROXY_SERVER, proxyHost);
             props.put(IConnectionManager.PROXY_PORT, proxyPort);
         }

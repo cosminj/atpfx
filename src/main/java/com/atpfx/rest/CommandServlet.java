@@ -20,5 +20,4 @@ public class CommandServlet {
     public IGateway connect() throws Exception {
         return fxcmConnection.connect();
     }
-
 }

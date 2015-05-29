@@ -14,4 +14,5 @@ import spock.lang.Specification
 @TransactionConfiguration(defaultRollback = true)
 @ContextConfiguration(loader = SpringApplicationContextLoader, classes = Atpfx)
 abstract class BaseIntegrationTest extends Specification {
+
 }
